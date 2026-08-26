@@ -883,7 +883,7 @@ a {
   z-index: 2;
   left: clamp(1.2rem, 7vw, 8rem);
   top: 50%;
-  width: min(40rem, 82vw);
+  width: min(58rem, calc(100vw - clamp(4rem, 14vw, 16rem)));
   transform: translateY(-50%);
 }
 .story-chapter {
@@ -904,14 +904,14 @@ a {
   transform: translateY(0);
 }
 .story-chapter h2 {
-  max-width: 9ch;
+  max-width: 13ch;
   font-family: var(--font-display), sans-serif;
   font-size: clamp(3.2rem, 7vw, 7rem);
   line-height: 0.9;
   letter-spacing: -0.075em;
 }
 .story-chapter p {
-  max-width: 33rem;
+  max-width: 46rem;
   margin-top: 1.4rem;
   color: var(--mist);
   font-size: clamp(1rem, 1.4vw, 1.2rem);

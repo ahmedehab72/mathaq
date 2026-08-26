@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { coffeeImages } from "@/lib/images";
 
 export function TasteBloom() {
   const [progress, setProgress] = useState(0);
@@ -46,7 +47,7 @@ export function TasteBloom() {
   return (
     <section className="section-wrap">
       <div className="grid items-center gap-10 rounded-[2rem] border border-[var(--line)] bg-[var(--canvas-soft)] p-5 md:grid-cols-2 md:p-10">
-        <div className="relative grid min-h-[28rem] place-items-center overflow-hidden rounded-[1.4rem] bg-[url('/assets/bloom-frame.jpg')] bg-cover bg-center">
+        <div className="relative grid min-h-[28rem] place-items-center overflow-hidden rounded-[1.4rem] bg-cover bg-center" style={{ backgroundImage: `url(${coffeeImages.bloom})` }}>
           <div className="absolute inset-0 bg-[rgba(4,16,13,.45)]" />
           <div
             className="absolute size-64 rounded-full border border-[rgba(238,229,212,.4)] bg-[rgba(197,107,72,.2)] blur-[1px] transition-transform duration-300"

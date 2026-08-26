@@ -13,6 +13,8 @@ export type Product = {
   featured?: boolean;
 };
 
+import { coffeeImages } from "@/lib/images";
+
 export const products: Product[] = [
   {
     slug: "morning-no-01",
@@ -25,7 +27,7 @@ export const products: Product[] = [
     notes: ["Chocolate", "Caramel", "Almond"],
     description:
       "A soft, generous cup built for slow mornings and forgiving brews.",
-    image: "/assets/hero-ending.jpg",
+    image: coffeeImages.cup,
     accent: "#c56b48",
     featured: true,
   },
@@ -40,7 +42,7 @@ export const products: Product[] = [
     notes: ["Bergamot", "Peach", "Honey"],
     description:
       "A lifted, fragrant coffee with a clean finish and a little morning sun.",
-    image: "/assets/bloom-frame.jpg",
+    image: coffeeImages.pourOver,
     accent: "#d89a5b",
   },
   {
@@ -54,7 +56,7 @@ export const products: Product[] = [
     notes: ["Cacao", "Fig", "Brown sugar"],
     description:
       "Dense sweetness for espresso, milk drinks, and evenings that run late.",
-    image: "/assets/roast-frame.jpg",
+    image: coffeeImages.beans,
     accent: "#8d4a36",
   },
   {
@@ -68,7 +70,7 @@ export const products: Product[] = [
     notes: ["Three 100 g bags", "Brew cards", "Gift wrap"],
     description:
       "A guided tasting through the soft, bright, and deep sides of MATHAQ.",
-    image: "/assets/hero-static.jpg",
+    image: coffeeImages.cafe,
     accent: "#9b6f56",
   },
 ];

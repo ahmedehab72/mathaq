@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { CinematicHero } from "@/components/cinematic-hero";
 import { ProductCard } from "@/components/product-card";
+import { coffeeImages } from "@/lib/images";
 import { Reveal } from "@/components/reveal";
 import { TasteBloom } from "@/components/taste-bloom";
 import { Button } from "@/components/ui/button";
@@ -131,21 +132,21 @@ export default function HomePage() {
               "Roast",
               "Heat shaped around sweetness, not darkness.",
               Flame,
-              "/assets/roast-frame.jpg",
+              coffeeImages.roastery,
             ],
             [
               "02",
               "Rest",
               "A few quiet days let the cup open clearly.",
               CalendarDays,
-              "/assets/bloom-frame.jpg",
+              coffeeImages.bloom,
             ],
             [
               "03",
               "Send",
               "Packed with the roast date where you can see it.",
               PackageCheck,
-              "/assets/hero-ending.jpg",
+              coffeeImages.cup,
             ],
           ].map(([number, title, copy, Icon, image], index) => {
             const StepIcon = Icon as typeof Flame;
@@ -196,7 +197,7 @@ export default function HomePage() {
       </section>
 
       <section className="section-wrap">
-        <Reveal className="feature-image bg-[url('/assets/roast-frame.jpg')]">
+        <Reveal className="feature-image" style={{ backgroundImage: `url(${coffeeImages.cafe})` }}>
           <div className="feature-copy">
             <p className="eyebrow">04 / Inside the roast</p>
             <h2 className="section-heading mt-4">

@@ -1,31 +1,32 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { coffeeImages } from "@/lib/images";
 
 const chapters = [
   {
     label: "01 / Before the roast",
     title: "We begin where the coffee remembers rain.",
     copy: "MATHAQ starts with traceable lots and people who can tell us how the coffee grew, not only where it shipped from.",
-    image: "/assets/hero-static.jpg",
+    image: coffeeImages.beans,
   },
   {
     label: "02 / The curve",
     title: "Heat is a language. We keep it quiet.",
     copy: "Each roast is shaped to keep sweetness intact. Enough development for comfort, enough restraint for the origin to remain visible.",
-    image: "/assets/roast-frame.jpg",
+    image: coffeeImages.roastery,
   },
   {
     label: "03 / The rest",
     title: "The bag waits before it asks you to brew.",
     copy: "Rest lets the cup open. The roast date stays visible so timing becomes part of the ritual, not a mystery.",
-    image: "/assets/bloom-frame.jpg",
+    image: coffeeImages.bloom,
   },
   {
     label: "04 / Your morning",
     title: "The last part belongs to you.",
     copy: "Choose the grind, follow a simple recipe, then change it. A good coffee should meet your morning where it is.",
-    image: "/assets/hero-ending.jpg",
+    image: coffeeImages.cup,
   },
 ];
 

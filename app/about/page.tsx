@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { StoryJourney } from "@/components/story-journey";
 import { PageIntro } from "@/components/page-intro";
+import { coffeeImages } from "@/lib/images";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = { title: "Our story" };
@@ -14,7 +15,7 @@ export default function AboutPage() {
         eyebrow="The story inside the cup"
         title="Taste has a memory."
         lede="MATHAQ is built around the moments most coffee pages skip. The farm before the bag. The rest after the roast. The reason one cup feels clear and another does not."
-        image="/assets/hero-ending.jpg"
+        image={coffeeImages.cup}
         imageAlt="A finished cup of coffee resting on a walnut counter"
         kicker="A QUIETER WAY TO WAKE"
         facts={[["STARTED", "2024"], ["ORIGIN", "VISIBLE"], ["PROMISE", "NO GUESSWORK"]]}

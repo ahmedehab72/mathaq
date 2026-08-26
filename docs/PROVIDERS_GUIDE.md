@@ -1,6 +1,6 @@
 # Providers Guide
 
-Global providers live in `src/shared/providers`.
+Global providers live in `shared/providers` and are composed by `app/layout.tsx`.
 
 Each provider owns its own folder:
 
@@ -25,7 +25,7 @@ providers/
 
 ## AppProviders
 
-`AppProviders` is only a composer. It should arrange global providers and avoid owning business logic directly.
+`Providers` is only a composer. It should arrange global providers and avoid owning business logic directly.
 
 Current order:
 
@@ -35,7 +35,7 @@ Current order:
 </ThemeProvider>
 ```
 
-`LanguageProvider` is mounted inside the router so it can read the locale from the URL. See `src/shared/providers/router.tsx`.
+Providers are composed from `app/layout.tsx`; route-aware providers can be mounted inside the relevant App Router segment.
 
 ## QueryProvider
 
@@ -52,20 +52,20 @@ Current order:
 - Supports `light`, `dark`, and `system`.
 - Defaults to `system`.
 - Adds the resolved theme class to `document.documentElement`.
-- Use `useTheme` from `src/shared/providers/theme` inside React components.
+- Use a feature-specific provider hook from `shared/providers` inside React components.
 - `AppSettingsControls` on the home page shows a small ready-to-use theme button.
 
 ## LanguageProvider
 
 `LanguageProvider` owns locale routing basics.
 
-- Uses `defaultLocale` and `supportedLocales` from `src/shared/i18n/config.ts`.
+- Locale configuration belongs in `shared/i18n` when internationalization is added.
 - Supports `en` and `ar`.
 - Reads the current locale from the `:lang` URL segment and keeps it in sync when `setLocale` is called.
 - Sets `document.documentElement.lang`.
 - Sets `document.documentElement.dir`.
-- Mounted on the `:lang` route in `src/shared/providers/router.tsx`, so it must stay inside the router tree.
-- Use `useLanguage` from `src/shared/providers/language` inside React components.
+- Mount locale providers in the App Router layout that owns the locale segment.
+- Use a clear provider hook from `shared/providers` inside React components.
 - `AppSettingsControls` on the home page shows a small ready-to-use language button.
 
 ## Rules

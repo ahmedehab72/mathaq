@@ -2,10 +2,10 @@
 
 import { Check, ShoppingBag } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { useCart } from "@/lib/cart-store";
-import type { Product } from "@/lib/products";
-import { formatMoney } from "@/lib/utils";
+import { useCart } from "@/features/cart/stores/cart-store";
+import type { Product } from "@/features/shop/services/products";
+import { Button } from "@/shared/components/ui/button";
+import { formatMoney } from "@/shared/lib/utils";
 
 const grinds = ["Whole bean", "Filter", "Espresso", "French press"];
 const sizes = [

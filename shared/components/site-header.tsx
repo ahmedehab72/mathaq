@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { Menu, ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
-import { BrandMark } from "@/components/brand-mark";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useCart } from "@/lib/cart-store";
-import { cn } from "@/lib/utils";
+import { useCart } from "@/features/cart/stores/cart-store";
+import { BrandMark } from "@/shared/components/brand-mark";
+import { Button } from "@/shared/components/ui/button";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/shared/components/ui/sheet";
+import { cn } from "@/shared/lib/utils";
 
 const links = [
   ["Story", "/about"],

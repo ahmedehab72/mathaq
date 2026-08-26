@@ -6,9 +6,9 @@ All commands are defined in `package.json` under the `"scripts"` key and are run
 
 | Script         | Command                | What it does                                                                    |
 | -------------- | ---------------------- | ------------------------------------------------------------------------------- |
-| `dev`          | `vite`                 | Starts the development server with hot module replacement. Used while coding.   |
-| `build`        | `tsc -b && vite build` | Type-checks the project, then creates an optimized production build in `dist/`. |
-| `preview`      | `vite preview`         | Serves the `dist/` output locally to verify the production build.               |
+| `dev`          | `next dev`             | Starts the Next.js development server with hot reload.                          |
+| `build`        | `next build`           | Type-checks and creates the optimized Next.js production build.                 |
+| `start`        | `next start`           | Serves the production build locally.                                            |
 | `lint`         | `eslint .`             | Lints the whole project for code quality issues.                                |
 | `format`       | `prettier . --write`   | Formats every file in the project.                                              |
 | `format:check` | `prettier . --check`   | Checks that files are already formatted without changing them. Used in CI.      |
@@ -16,6 +16,6 @@ All commands are defined in `package.json` under the `"scripts"` key and are run
 
 ## Notes
 
-- `build` runs `tsc -b` before Vite, so type errors fail the build.
+- `build` runs Next.js type checking and static generation, so type errors fail the build.
 - `lint-staged` is configured in `package.json` and formats/lints only staged files on commit.
 - Run `npm run lint` and `npm run build` after installing a fresh project to verify the setup.

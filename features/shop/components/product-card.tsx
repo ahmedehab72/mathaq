@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import type { Product } from "@/lib/products";
-import { formatMoney } from "@/lib/utils";
+import type { Product } from "@/features/shop/services/products";
+import { formatMoney } from "@/shared/lib/utils";
 
 export function ProductCard({ product }: { product: Product }) {
   return (

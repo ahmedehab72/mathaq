@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, IBM_Plex_Mono, Manrope } from "next/font/google";
 import "./globals.css";
-import { AmbientLayer } from "@/components/ambient-layer";
-import { Providers } from "@/components/providers";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { AmbientLayer } from "@/shared/components/ambient-layer";
+import { SiteFooter } from "@/shared/components/site-footer";
+import { SiteHeader } from "@/shared/components/site-header";
+import { Providers } from "@/shared/providers/providers";
 
 const display = Fraunces({
   subsets: ["latin"],

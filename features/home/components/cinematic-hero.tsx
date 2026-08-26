@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 
 const GATES = [
   "(max-width: 720px)",

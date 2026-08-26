@@ -1,89 +1,67 @@
-# Project Structure
+# MATHAQ Project Structure
 
-For the full tree view, see [Folder Structure Graph](./FOLDER_STRUCTURE_GRAPH.md).
-
-```txt
-public/
-src/
-  App.tsx
-  main.tsx
-  routes/
-  features/
-  shared/
-docs/
-```
-
-## Root Files
-
-- `src/main.tsx` mounts React and imports global styles.
-- `src/App.tsx` wires the app providers, router, and error boundary.
-
-## routes
-
-Top-level application pages live in `src/routes`.
-
-Feature-owned pages should stay inside `src/features/{feature-name}/routes`.
-
-## features
-
-Each business feature owns its components, hooks, schemas, services, constants, skeletons, and routes.
+This project uses Next.js App Router with a feature-first architecture adapted from the original template rules.
 
 ```txt
-features/users/
+app/                         # Next route entries, layouts, metadata, and global CSS
+  page.tsx
+  about/page.tsx
+  shop/page.tsx
+  shop/[slug]/page.tsx
+  brew/page.tsx
+  cart/page.tsx
+  checkout/page.tsx
+  account/page.tsx
+  admin/page.tsx
+
+features/                    # Business domains. Feature code stays local.
+  home/components/
+  shop/
+    components/
+    services/
+    constants/
+    hooks/
+    schemas/
+    skeletons/
+  about/components/
+  brew/components/
+  cart/
+    components/
+    stores/
+  checkout/components/
+  admin/components/
+
+shared/                      # Reusable code used by two or more features
   components/
-    user-form.tsx
-    user-card.tsx
-    users-list.tsx
-    users-page.tsx
-  constants/
-    user-constants.ts
+    ui/                      # shadcn/Radix primitives
+    common/                  # reusable loading, empty, and error states
   hooks/
-    use-users.ts
-  schemas/
-    user-schema.ts
-  services/
-    users-service.ts
-  skeletons/
-    users-page-skeleton.tsx
-  routes/
-```
-
-## shared
-
-Reusable code used by more than one feature lives here.
-
-```txt
-shared/
-  assets/
-  components/
-    common/
-      errors/
-      states/
-    ui/
-  hooks/
-  i18n/
   layouts/
   guards/
   lib/
   providers/
-    app-providers.tsx
-    router.tsx
-    language/
-    query/
-    theme/
   services/
   styles/
-  utils/
+
+public/                      # Files that need a direct public URL
+docs/                        # Project rules and implementation guides
 ```
 
-- `components/ui` contains shadcn-style primitives.
-- `components/common/states` contains reusable loading, empty, and error states.
-- `components/common/errors` contains error boundaries and related error UI helpers.
-- `components/ui` should contain shadcn/base UI primitives used by screens and features.
-- `guards` contains reusable route guards like `AuthGuard`.
-- `providers` contains app-level provider composition, router setup, and provider modules.
-- `services` contains shared service clients and error normalization.
+## Next.js adaptation
 
-## public
+- `app/**/page.tsx` files are thin route adapters. They compose feature screens and should not own feature business logic.
+- Feature components, services, hooks, schemas, constants, and skeletons belong under `features/{feature-name}`.
+- Shared UI, providers, layouts, utilities, and infrastructure belong under `shared`.
+- `components/ui` is now `shared/components/ui`.
+- Product data and product services are now in `features/shop/services`.
+- Cart state is now in `features/cart/stores`.
+- Do not add a new top-level `components` or `lib` folder.
+- Use direct aliased imports. Do not create feature barrel `index.ts` files.
 
-Only static files that need a direct public URL should live here.
+## Naming
+
+- Folders and files use `kebab-case`.
+- React components use `PascalCase`.
+- Hooks start with `use`.
+- Services end with `-service` when they represent an API client.
+- Schemas and types use clear domain names.

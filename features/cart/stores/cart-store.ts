@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Product } from "@/lib/products";
+import type { Product } from "@/features/shop/services/products";
 
 export type CartItem = {
   id: string;

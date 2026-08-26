@@ -2,9 +2,9 @@
 
 import { BarChart3, Box, LayoutDashboard, PackagePlus, ShoppingBag, Users } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { products } from "@/lib/products";
-import { formatMoney } from "@/lib/utils";
+import { products } from "@/features/shop/services/products";
+import { Button } from "@/shared/components/ui/button";
+import { formatMoney } from "@/shared/lib/utils";
 
 const nav = [
   ["Overview", LayoutDashboard], ["Products", Box], ["Orders", ShoppingBag], ["Customers", Users], ["Analytics", BarChart3],

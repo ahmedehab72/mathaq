@@ -1,35 +1,21 @@
 # Routing Guide
 
-Routes are configured in `src/shared/providers/router.tsx` with React Router object routes.
+This project uses the Next.js App Router. Routes are represented by folders inside `app/`.
 
 ## Rules
 
-- Layouts live in `src/shared/layouts`.
-- Top-level static pages live in `src/routes`.
-- Feature screens live in `src/features/{feature-name}/routes`.
-- Import feature route components directly from their file path.
-- Unknown routes should render `src/routes/not-found-page.tsx`.
-- Route errors should render `src/routes/route-error-page.tsx` through `errorElement`.
+- Keep route entries in `app/**/page.tsx` thin.
+- Keep shared layout and providers in `app/layout.tsx` and `shared/providers`.
+- Keep feature screens and feature logic inside `features/{feature-name}`.
+- Keep route-specific loading, error, and not-found UI beside the route when needed.
+- Preserve existing public slugs: `/`, `/about`, `/shop`, `/shop/[slug]`, `/brew`, `/cart`, `/checkout`, `/account`, `/admin`.
+- Use `notFound()` for missing product slugs.
+- Use route-level `loading.tsx` and `error.tsx` when a route introduces asynchronous or failure-prone work.
 
-## Add a Route
+## Adding a route
 
-1. Create the route component in `src/routes` or inside a feature `routes` folder.
-2. Import feature route components directly from their file path when needed.
-3. Register the route in `src/shared/providers/router.tsx`.
-
-Current template routes:
-
-- `/` redirects to `/{defaultLocale}`
-- `/{locale}` (e.g. `/en`, `/ar`)
-- `/{locale}/user` (e.g. `/en/user`, `/ar/user`)
-
-## Locale in the URL
-
-- The locale lives in the first URL segment via the `:lang` param.
-- Invalid locales redirect to `/{defaultLocale}` using the `localeLoader`.
-- `LanguageProvider` reads `:lang` from the URL and keeps it in sync when `setLocale` is called.
-- Build internal links with the current locale, e.g. via `useLanguage`.
-
-## Protected Routes
-
-Auth and permission wrappers live in `src/shared/guards`.
+1. Create the route folder under `app`.
+2. Add a thin `page.tsx` route adapter.
+3. Put the screen and business logic in the owning feature folder.
+4. Add `loading.tsx`, `error.tsx`, or `not-found.tsx` when the route needs them.
+5. Run `npm run lint` and `npm run build`.

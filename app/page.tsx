@@ -6,13 +6,13 @@ import {
   MapPin,
   PackageCheck,
 } from "lucide-react";
-import { CinematicHero } from "@/components/cinematic-hero";
-import { ProductCard } from "@/components/product-card";
-import { coffeeImages } from "@/lib/images";
-import { Reveal } from "@/components/reveal";
-import { TasteBloom } from "@/components/taste-bloom";
-import { Button } from "@/components/ui/button";
-import { products } from "@/lib/products";
+import { CinematicHero } from "@/features/home/components/cinematic-hero";
+import { ProductCard } from "@/features/shop/components/product-card";
+import { products } from "@/features/shop/services/products";
+import { coffeeImages } from "@/shared/lib/images";
+import { Reveal } from "@/shared/components/reveal";
+import { TasteBloom } from "@/features/brew/components/taste-bloom";
+import { Button } from "@/shared/components/ui/button";
 
 const promises = [
   [

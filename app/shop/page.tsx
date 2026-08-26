@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { ShopGrid } from "@/components/shop-grid";
-import { PageIntro } from "@/components/page-intro";
-import { coffeeImages } from "@/lib/images";
+import { ShopGrid } from "@/features/shop/components/shop-grid";
+import { coffeeImages } from "@/shared/lib/images";
+import { PageIntro } from "@/shared/components/page-intro";
 
 export const metadata: Metadata = { title: "Coffee" };
 

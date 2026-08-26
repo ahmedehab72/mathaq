@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useCart } from "@/lib/cart-store";
-import { formatMoney } from "@/lib/utils";
+import { useCart } from "@/features/cart/stores/cart-store";
+import { Button } from "@/shared/components/ui/button";
+import { formatMoney } from "@/shared/lib/utils";
 
 export function CartView() {
   const { items, changeQuantity, removeItem } = useCart();

@@ -2,9 +2,9 @@
 
 import { CheckCircle2, LockKeyhole } from "lucide-react";
 import { FormEvent, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { useCart } from "@/lib/cart-store";
-import { formatMoney } from "@/lib/utils";
+import { useCart } from "@/features/cart/stores/cart-store";
+import { Button } from "@/shared/components/ui/button";
+import { formatMoney } from "@/shared/lib/utils";
 
 export function CheckoutForm() {
   const [complete, setComplete] = useState(false);

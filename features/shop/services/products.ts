@@ -13,7 +13,7 @@ export type Product = {
   featured?: boolean;
 };
 
-import { coffeeImages } from "@/lib/images";
+import { coffeeImages } from "@/shared/lib/images";
 
 export const products: Product[] = [
   {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { BrewLab } from "@/components/brew-lab";
-import { PageIntro } from "@/components/page-intro";
-import { coffeeImages } from "@/lib/images";
+import { BrewLab } from "@/features/brew/components/brew-lab";
+import { coffeeImages } from "@/shared/lib/images";
+import { PageIntro } from "@/shared/components/page-intro";
 
 export const metadata: Metadata = { title: "Brew lab" };
 

@@ -1,18 +1,14 @@
 # Feature Guide
 
-## Add a New Feature
-
-Create a folder under `src/features`.
+Each business domain owns its UI and logic under `features/{feature-name}`.
 
 ```txt
-src/features/orders/
+features/orders/
   components/
     order-form.tsx
     order-card.tsx
-    orders-list.tsx
     orders-page.tsx
   constants/
-    order-constants.ts
   hooks/
     use-orders.ts
   schemas/
@@ -21,19 +17,18 @@ src/features/orders/
     orders-service.ts
   skeletons/
     orders-page-skeleton.tsx
-  routes/
 ```
 
 ## Rules
 
-- Do not create a feature-level `index.ts` barrel.
-- Import feature files directly from their folder, like `@/features/orders/components/orders-page`.
-- Keep each feature component in its own file inside `components`.
-- Keep feature-specific code inside the feature folder.
+- Keep each feature component in its own file.
+- Keep feature-specific code inside its feature folder.
 - Move code to `shared` only when at least two features need it.
 - Keep API calls inside `services`.
 - Keep validation schemas inside `schemas`.
-- Keep route screens inside `routes`.
+- Keep route screens inside the feature folder when the screen is feature-owned.
 - Keep loading placeholders inside `skeletons`.
 - Keep feature constants inside `constants`.
 - Keep feature hooks inside `hooks`.
+- Do not create feature-level barrel `index.ts` files.
+- Import exact files, for example `@/features/shop/components/shop-grid`.

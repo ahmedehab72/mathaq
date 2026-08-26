@@ -14,7 +14,7 @@ The default form stack is:
 3. Use `zodResolver(schema)`.
 4. Keep submit behavior in the route/page or feature container.
 
-See `src/features/users` for a working example.
+Feature forms belong in `features/{feature-name}/components`, with schemas in the same feature's `schemas` folder.
 
 ## Error Rules
 

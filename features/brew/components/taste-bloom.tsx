@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { coffeeImages } from "@/lib/images";
+import { coffeeImages } from "@/shared/lib/images";
 
 export function TasteBloom() {
   const [progress, setProgress] = useState(0);

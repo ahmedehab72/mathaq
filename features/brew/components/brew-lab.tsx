@@ -2,7 +2,7 @@
 
 import { Play, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 
 const methods = {
   V60: { ratio: 16, time: "2:45", grind: "Medium fine" },

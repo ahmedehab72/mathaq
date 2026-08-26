@@ -4,21 +4,21 @@ The template handles errors in three layers: UI runtime errors, route errors, an
 
 ## UI Runtime Errors
 
-Use `src/shared/components/common/errors/error-boundary.tsx` to catch unexpected React render errors.
+Use a shared error boundary under `shared/components/common/errors` when client UI needs a runtime fallback.
 
-`src/App.tsx` wraps the app with `ErrorBoundary`, so unhandled UI errors show a safe fallback instead of a blank screen. The fallback includes a retry button that resets the boundary.
+The root layout is the place to compose the error boundary and provider shell, so unhandled UI errors show a safe fallback instead of a blank screen.
 
 ## Route Errors
 
-Unknown routes render `src/routes/not-found-page.tsx`.
+Unknown routes use Next.js `not-found.tsx` or `notFound()`.
 
-Route object failures render `src/routes/route-error-page.tsx` through `errorElement`.
+Route failures use a route-local `error.tsx` boundary.
 
-Add new top-level routes in `src/shared/providers/router.tsx`. Feature route screens should stay inside `src/features/{feature-name}/routes`.
+Add new top-level routes under `app/`. Feature route screens should stay inside `features/{feature-name}`.
 
 ## API Errors
 
-Use `src/shared/services/api-client.ts` for requests and `src/shared/services/api-error.ts` for error normalization.
+Use `shared/services/api-client.ts` for requests and `shared/services/api-error.ts` for error normalization.
 
 The normalized error shape is:
 
@@ -33,7 +33,7 @@ type ApiError = {
 
 ## TanStack Query
 
-`src/shared/providers/app-providers.tsx` contains default retry behavior:
+The TanStack Query provider in `shared/providers` contains default retry behavior:
 
 - Do not retry 4xx client errors.
 - Retry server or network errors once.

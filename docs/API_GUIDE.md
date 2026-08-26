@@ -2,7 +2,7 @@
 
 ## Shared Client
 
-Use `src/shared/services/api-client.ts` for shared HTTP configuration.
+Use `shared/services/api-client.ts` for shared HTTP configuration.
 
 ```ts
 import { apiClient } from "@/shared/services/api-client";
@@ -13,12 +13,12 @@ import { apiClient } from "@/shared/services/api-client";
 Feature-specific API calls belong in:
 
 ```txt
-src/features/{feature-name}/services/
+features/{feature-name}/services/
 ```
 
 ## Error Shape
 
-All API errors should use the normalized shape from `src/shared/services/api-error.ts`.
+All API errors should use the normalized shape from `shared/services/api-error.ts`.
 
 ```ts
 type ApiError = {

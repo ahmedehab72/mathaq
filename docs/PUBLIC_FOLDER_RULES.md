@@ -5,7 +5,7 @@
 - Use `public` only for static files that need a direct URL.
 - Do not put secrets, API keys, or private config in `public`.
 - Do not put business logic in `public`.
-- Prefer `src/shared/assets` for images imported by React components.
+- Prefer `shared/assets` for images imported by React components. Remote image hosts must be explicitly configured in `next.config.ts`.
 - Keep public assets organized:
 
 ```txt

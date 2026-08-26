@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { StoryJourney } from "@/components/story-journey";
-import { PageIntro } from "@/components/page-intro";
-import { coffeeImages } from "@/lib/images";
-import { Button } from "@/components/ui/button";
+import { StoryJourney } from "@/features/about/components/story-journey";
+import { coffeeImages } from "@/shared/lib/images";
+import { PageIntro } from "@/shared/components/page-intro";
+import { Button } from "@/shared/components/ui/button";
 
 export const metadata: Metadata = { title: "Our story" };
 

@@ -7,7 +7,7 @@ Import order is enforced by `eslint-plugin-import` (see `eslint.config.js`). `np
 
 Imports are split into groups separated by a blank line, in this order:
 
-1. **Side-effect imports** — `import "@/shared/styles/globals.css"`
+1. **Side-effect imports** — `import "./globals.css"` in `app/layout.tsx`
 2. **External packages** — `react`, `react-router-dom`, `lucide-react`, ...
 3. **Internal aliased imports** — `@/...`
 4. **Relative imports** — `./...`, `../...`
@@ -16,7 +16,7 @@ Within each group, do not manually depend on alphabetical ordering. Keep imports
 
 ## Examples
 
-import "@/shared/styles/globals.css";
+import "./globals.css";
 
 import React from "react";
 import { Link } from "react-router-dom";
@@ -40,13 +40,11 @@ import { useLanguage } from "@/shared/providers/language";
 ### Side-effect imports first (`main.tsx`)
 
 ```ts
-import "@/shared/i18n";
-import "@/shared/styles/globals.css";
+import "./globals.css";
 
-import React from "react";
-import ReactDOM from "react-dom/client";
+import type { Metadata } from "next";
 
-import { App } from "@/App";
+import { Providers } from "@/shared/providers/providers";
 ```
 
 ### Named specifiers

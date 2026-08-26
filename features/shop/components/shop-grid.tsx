@@ -2,8 +2,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
-import { ProductCard } from "@/components/product-card";
-import { getProducts } from "@/lib/products";
+import { ProductCard } from "@/features/shop/components/product-card";
+import { getProducts } from "@/features/shop/services/products";
 
 const filters = ["All", "Light", "Medium", "Medium dark"];
 

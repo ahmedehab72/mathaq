@@ -49,9 +49,9 @@
 ### Checkout وOrders
 
 - [ ] تطوير `/checkout` إلى خطوات واضحة: details، delivery، payment preview.
-- [ ] `/order-confirmation/[id]`: رقم الطلب، المنتجات، العنوان، الإجمالي، والحالة.
-- [ ] `/account/orders/[id]`: تفاصيل الطلب السابق وtimeline.
-- [ ] `/track-order`: إدخال رقم الطلب والبريد وعرض حالة الشحن.
+- [x] `/order-confirmation/[id]`: رقم الطلب، المنتجات، العنوان، الإجمالي، والحالة كواجهة Design Preview.
+- [x] `/account/orders/[id]`: تفاصيل الطلب السابق وtimeline كواجهة Design Preview.
+- [x] `/track-order`: إدخال رقم الطلب والبريد وعرض حالة الشحن كواجهة Design Preview.
 - [ ] استخدام Mock orders حتى اكتمال الـ Backend.
 
 ### Journal وSEO

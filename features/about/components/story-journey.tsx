@@ -5,28 +5,28 @@ import { coffeeImages } from "@/shared/lib/images";
 
 const chapters = [
   {
-    label: "01 / Before the roast",
-    title: "We begin where the coffee remembers rain.",
-    copy: "MATHAQ starts with traceable lots and people who can tell us how the coffee grew, not only where it shipped from.",
-    image: coffeeImages.beans,
+    label: "01 / Coffee beans",
+    title: "Every cup begins with the bean.",
+    copy: "We start with carefully selected coffee beans, keeping their origin and character visible from the very beginning.",
+    image: coffeeImages.storyBeans,
   },
   {
-    label: "02 / The curve",
-    title: "Heat is a language. We keep it quiet.",
-    copy: "Each roast is shaped to keep sweetness intact. Enough development for comfort, enough restraint for the origin to remain visible.",
-    image: coffeeImages.roastery,
+    label: "02 / Grinding",
+    title: "The grind opens the door to flavor.",
+    copy: "The beans are ground to suit the brew, releasing the aroma and texture that shape the cup ahead.",
+    image: coffeeImages.storyGrinding,
   },
   {
-    label: "03 / The rest",
-    title: "The bag waits before it asks you to brew.",
-    copy: "Rest lets the cup open. The roast date stays visible so timing becomes part of the ritual, not a mystery.",
-    image: coffeeImages.bloom,
+    label: "03 / Preparing",
+    title: "Water turns preparation into ritual.",
+    copy: "A measured pour, the right temperature, and a little patience bring the coffee into balance.",
+    image: coffeeImages.storyPreparing,
   },
   {
-    label: "04 / Your morning",
-    title: "The last part belongs to you.",
-    copy: "Choose the grind, follow a simple recipe, then change it. A good coffee should meet your morning where it is.",
-    image: coffeeImages.cup,
+    label: "04 / Serving",
+    title: "The final moment is made to be shared.",
+    copy: "Serve the cup while it is at its best, then let the first sip complete the journey.",
+    image: coffeeImages.storyServing,
   },
 ];
 
@@ -66,7 +66,7 @@ export function StoryJourney() {
             style={{
               backgroundImage: `url(${chapter.image})`,
               opacity: active === index ? 1 : 0,
-              transform: `scale(${active === index ? 1.02 : 1.08})`,
+              transform: `scale(${active === index ? 1 : 1.04})`,
             }}
           />
         ))}

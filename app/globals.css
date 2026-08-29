@@ -953,6 +953,7 @@ a {
   inset: 0;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   transition:
     opacity 0.8s var(--ease-soft),
     transform 1.2s var(--ease-soft);

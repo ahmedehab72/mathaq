@@ -21,10 +21,12 @@ export function SiteFooter() {
           <Link href="/about">Our story</Link>
           <Link href="/shop">Coffee</Link>
           <Link href="/brew">Brew lab</Link>
+          <Link href="/journal">Journal</Link>
         </div>
         <div className="footer-links">
           <p className="eyebrow">Visit</p>
           <Link href="/account">Account</Link>
+          <Link href="/wishlist">Wishlist</Link>
           <Link href="/admin">Admin preview</Link>
           <a href="mailto:hello@mathaq.coffee">Contact <ArrowUpRight className="size-3.5" /></a>
         </div>

@@ -1,0 +1,4 @@
+import type { Metadata } from "next";
+import { PolicyPage } from "@/features/content/components/policy-page";
+export const metadata: Metadata = { title: "Privacy policy" };
+export default function PrivacyPage() { return <PolicyPage eyebrow="The fine print" title="Privacy, plainly." intro="A short explanation of what this design preview would keep, use, and protect." sections={[{ title: "What we collect", copy: "In production, we would collect the details needed to create an account, deliver an order, and answer a message." }, { title: "What we use it for", copy: "Your information would only support the service you asked for, such as order updates, account access, and customer care." }, { title: "Your choices", copy: "You would be able to access, update, or request deletion of your account data through a clear support channel." }]} />; }

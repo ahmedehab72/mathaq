@@ -1,0 +1,5 @@
+"use client";
+
+import { Check, Tag } from "lucide-react";
+import { useState } from "react";
+export function CouponPreview() { const [code, setCode] = useState(""); const [applied, setApplied] = useState(false); return <div className="mt-6 border-t border-[var(--line)] pt-5"><p className="eyebrow">Have a code?</p><div className="mt-3 flex gap-2"><label className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-[var(--line-strong)] px-3"><Tag className="size-4 shrink-0 text-[var(--clay)]" /><input className="min-w-0 flex-1 bg-transparent py-3 text-sm text-[var(--oat)] outline-none" value={code} onChange={(event) => { setCode(event.target.value); setApplied(false); }} placeholder="MATHAQ10" /></label><button type="button" className="rounded-xl bg-[var(--oat)] px-4 text-xs font-semibold text-[var(--canvas)]" onClick={() => setApplied(Boolean(code.trim()))}>{applied ? <Check className="size-4" /> : "Apply"}</button></div>{applied && <p className="mt-2 text-xs text-[var(--clay)]">Preview code applied.</p>}</div>; }

@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { previewOrder } from "@/features/orders/services/order-preview";
+export default function AdminCustomerDetailPage() { return <div className="page-shell admin-detail-page"><section className="section-wrap"><Link href="/admin/customers" className="text-link"><ArrowLeft className="size-4" />Customers</Link><p className="eyebrow mt-16">Customer profile</p><h1 className="mt-4 font-display text-7xl font-semibold tracking-[-.08em]">MATHAQ guest</h1><div className="mt-12 grid gap-5 md:grid-cols-3"><div className="metric-card"><span className="eyebrow">Email</span><strong className="text-base">guest@example.com</strong></div><div className="metric-card"><span className="eyebrow">Orders</span><strong>01</strong></div><div className="metric-card"><span className="eyebrow">Last order</span><strong>{previewOrder.id}</strong></div></div></section></div>; }

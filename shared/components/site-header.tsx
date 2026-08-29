@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, ShoppingBag } from "lucide-react";
+import { Heart, Menu, ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/features/cart/stores/cart-store";
 import { BrandMark } from "@/shared/components/brand-mark";
@@ -13,7 +13,7 @@ const links = [
   ["Story", "/about"],
   ["Coffee", "/shop"],
   ["Brew lab", "/brew"],
-  ["Journal", "/about#journal"],
+  ["Journal", "/journal"],
 ] as const;
 
 export function SiteHeader() {
@@ -54,6 +54,9 @@ export function SiteHeader() {
       </nav>
 
       <div className="flex items-center gap-2">
+        <Button asChild variant="ghost" size="icon" aria-label="Open wishlist">
+          <Link href="/wishlist"><Heart className="size-5" /></Link>
+        </Button>
         <Button asChild variant="ghost" size="icon" className="relative" aria-label="Open cart">
           <Link href="/cart">
             <ShoppingBag className="size-5" />

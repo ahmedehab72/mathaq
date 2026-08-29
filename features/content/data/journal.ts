@@ -1,0 +1,7 @@
+export const journalPosts = [
+  { slug: "let-coffee-rest", number: "01", category: "The cup", title: "Why coffee needs rest", excerpt: "Fresh from the roaster is not always ready for water. Rest gives sweetness room to open.", body: "Coffee keeps changing after the roast. A few quiet days let trapped gas leave the bean, so water can reach the sweetness underneath. There is no single perfect day, only a window that becomes clearer when you pay attention.", date: "12 Aug 2026", read: "4 min read" },
+  { slug: "reading-a-roast-date", number: "02", category: "The bag", title: "Reading a roast date", excerpt: "Think in weeks, not expiry dates. Timing is part of the recipe.", body: "A roast date is an invitation to notice. Light roasts may ask for more time, while a balanced house roast can settle sooner. Keep the bag closed, keep it away from heat, and taste it again as the weeks move.", date: "05 Aug 2026", read: "3 min read" },
+  { slug: "what-tasting-notes-mean", number: "03", category: "The language", title: "What tasting notes mean", excerpt: "Chocolate, peach, and honey are references, not ingredients.", body: "Tasting notes give the cup a shared language. They point toward familiar sweetness, aroma, texture, and finish. They do not promise a flavouring was added. They help you decide what kind of morning the coffee might make.", date: "28 Jul 2026", read: "5 min read" },
+];
+
+export function getJournalPost(slug: string) { return journalPosts.find((post) => post.slug === slug); }

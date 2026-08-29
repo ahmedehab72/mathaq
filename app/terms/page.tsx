@@ -1,0 +1,4 @@
+import type { Metadata } from "next";
+import { PolicyPage } from "@/features/content/components/policy-page";
+export const metadata: Metadata = { title: "Terms" };
+export default function TermsPage() { return <PolicyPage eyebrow="The fine print" title="Terms that make sense." intro="The simple rules for choosing, receiving, and enjoying MATHAQ coffee." sections={[{ title: "Using the shop", copy: "Product descriptions, tasting notes, and availability are presented to help you choose. Orders are confirmed only after successful checkout." }, { title: "Accounts", copy: "Keep your account details accurate and your password private. Your account is for your own use." }, { title: "Changes", copy: "Prices, availability, and these terms may change as the service develops. We will keep important updates clear." }]} />; }

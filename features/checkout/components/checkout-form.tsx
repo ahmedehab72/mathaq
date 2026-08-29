@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { useCart } from "@/features/cart/stores/cart-store";
 import { Button } from "@/shared/components/ui/button";
 import { formatMoney } from "@/shared/lib/utils";
+import { CouponPreview } from "@/features/cart/components/coupon-preview";
 
 export function CheckoutForm() {
   const [complete, setComplete] = useState(false);
@@ -70,6 +71,7 @@ export function CheckoutForm() {
           )) : <p className="text-sm text-[var(--mist)]">Your tray is empty. The form remains visible for design review.</p>}
         </div>
         <div className="mt-5 flex justify-between text-lg"><strong>Preview total</strong><strong>{formatMoney(subtotal)}</strong></div>
+        <CouponPreview />
       </aside>
     </section>
   );

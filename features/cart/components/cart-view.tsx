@@ -5,6 +5,7 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { useCart } from "@/features/cart/stores/cart-store";
 import { Button } from "@/shared/components/ui/button";
 import { formatMoney } from "@/shared/lib/utils";
+import { CouponPreview } from "@/features/cart/components/coupon-preview";
 
 export function CartView() {
   const { items, changeQuantity, removeItem } = useCart();
@@ -57,6 +58,7 @@ export function CartView() {
         </div>
         <Button asChild size="lg" className="mt-7 w-full"><Link href="/checkout">Continue to checkout</Link></Button>
         <p className="mt-4 text-center text-xs leading-5 text-[var(--mist)]">The checkout is a designed preview. No payment will be taken.</p>
+        <CouponPreview />
       </aside>
     </section>
   );

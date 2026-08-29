@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductPurchase } from "@/features/shop/components/product-purchase";
+import { ReviewPreview } from "@/features/shop/components/review-preview";
 import { getProduct, products } from "@/features/shop/services/products";
 
 export function generateStaticParams() {
@@ -24,6 +25,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div className="flavor-orbit" aria-hidden="true">
           {product.notes.slice(0, 3).map((note) => <span key={note}>{note}</span>)}
         </div>
+        <ReviewPreview />
       </section>
       <section className="product-detail-copy">
         <p className="eyebrow">{product.eyebrow}</p>

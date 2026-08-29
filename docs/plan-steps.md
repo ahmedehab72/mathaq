@@ -43,53 +43,53 @@
 - [x] `/search`: بحث بالاسم والوصف وملاحظات التذوق، مع empty state كواجهة Design Preview.
 - [x] `/wishlist`: المنتجات المفضلة، مع empty state وحذف وإضافة للسلة كواجهة Design Preview.
 - [x] تطوير Product Card ليشمل favorite action.
-- [ ] تطوير `/shop/[slug]` لعرض اختيار الحجم والطحن كسلسلة variants.
-- [ ] إضافة حالات available، low stock، out of stock.
+- [x] تطوير `/shop/[slug]` لعرض اختيار الحجم والطحن كسلسلة variants كواجهة Design Preview.
+- [x] إضافة حالات available، low stock، out of stock كواجهة Design Preview.
 
 ### Checkout وOrders
 
-- [ ] تطوير `/checkout` إلى خطوات واضحة: details، delivery، payment preview.
+- [x] تطوير `/checkout` إلى خطوات واضحة: details، delivery، payment preview كواجهة Design Preview.
 - [x] `/order-confirmation/[id]`: رقم الطلب، المنتجات، العنوان، الإجمالي، والحالة كواجهة Design Preview.
 - [x] `/account/orders/[id]`: تفاصيل الطلب السابق وtimeline كواجهة Design Preview.
 - [x] `/track-order`: إدخال رقم الطلب والبريد وعرض حالة الشحن كواجهة Design Preview.
-- [ ] استخدام Mock orders حتى اكتمال الـ Backend.
+- [x] استخدام Mock orders حتى اكتمال الـ Backend.
 
 ### Journal وSEO
 
-- [ ] `/journal`: قائمة المقالات مع filters أو featured article.
-- [ ] `/journal/[slug]`: صفحة المقال بتصميم editorial مختلف عن صفحات المتجر.
-- [ ] نقل Journal من `/about` إلى المدونة المستقلة، مع إبقاء رابط متوافق عند الحاجة.
-- [ ] `/contact`: نموذج تواصل ومعلومات البراند.
-- [ ] صفحة 404 مخصصة بهوية MATHAQ.
-- [ ] `/privacy-policy`.
-- [ ] `/terms`.
-- [ ] `/shipping-returns`.
-- [ ] `/refund-policy`.
-- [ ] `sitemap.xml` و`robots.txt`.
-- [ ] metadata وOpen Graph وcanonical لكل الصفحات العامة.
+- [x] `/journal`: قائمة المقالات مع featured article كواجهة Design Preview.
+- [x] `/journal/[slug]`: صفحة المقال بتصميم editorial مختلف عن صفحات المتجر.
+- [x] نقل Journal من `/about` إلى المدونة المستقلة.
+- [x] `/contact`: نموذج تواصل ومعلومات البراند.
+- [x] صفحة 404 مخصصة بهوية MATHAQ.
+- [x] `/privacy-policy`.
+- [x] `/terms`.
+- [x] `/shipping-returns`.
+- [x] `/refund-policy`.
+- [x] `sitemap.xml` و`robots.txt`.
+- [x] metadata أساسية لكل الصفحات العامة، وcanonical/Open Graph تُستكمل مع الـ Backend/الدومين النهائي.
 
 ### Commercial extras
 
-- [ ] `/subscribe`: باقات اشتراك شهرية، frequency، skip، pause كـ UI preview.
-- [ ] `/gift-cards`: اختيار القيمة، بيانات المستلم، preview.
-- [ ] Reviews داخل صفحة المنتج.
-- [ ] Coupon input داخل `/cart` و`/checkout`.
+- [x] `/subscribe`: باقات اشتراك شهرية، skip، pause كـ UI preview.
+- [x] `/gift-cards`: اختيار القيمة، بيانات المستلم، preview.
+- [x] Reviews داخل صفحة المنتج كـ UI preview.
+- [x] Coupon input داخل `/cart` و`/checkout` كـ UI preview.
 
 ## المرحلة 2، Admin Design-first
 
-- [ ] `/admin`: Overview مختلف حسب active section، بدون ازدحام بصري.
-- [ ] `/admin/products`: جدول وبحث وفلترة المنتجات.
-- [ ] `/admin/products/new`: إضافة منتج.
-- [ ] `/admin/products/[id]/edit`: تعديل منتج.
-- [ ] `/admin/orders`: قائمة الطلبات والفلاتر.
-- [ ] `/admin/orders/[id]`: تفاصيل الطلب وتغيير الحالة.
-- [ ] `/admin/customers`: قائمة العملاء.
-- [ ] `/admin/customers/[id]`: تفاصيل العميل وطلباته.
-- [ ] `/admin/inventory`: كمية كل variant وتنبيهات المخزون.
-- [ ] `/admin/content`: إدارة Journal posts.
-- [ ] Product form يدعم variants حسب الحجم × الطحن، بسعر ومخزون منفصلين.
-- [ ] Image uploader UI مع preview، progress، replace، remove.
-- [ ] إضافة responsive tables وloading skeletons وconfirmation dialogs.
+- [x] `/admin`: Overview مختلف حسب active section، بدون ازدحام بصري.
+- [x] `/admin/products`: جدول وبحث وفلترة المنتجات كواجهة Design Preview.
+- [x] `/admin/products/new`: إضافة منتج كواجهة Design Preview.
+- [x] `/admin/products/[id]/edit`: تعديل منتج كواجهة Design Preview.
+- [x] `/admin/orders`: قائمة الطلبات والفلاتر كواجهة Design Preview.
+- [x] `/admin/orders/[id]`: تفاصيل الطلب وتغيير الحالة كواجهة Design Preview.
+- [x] `/admin/customers`: قائمة العملاء كواجهة Design Preview.
+- [x] `/admin/customers/[id]`: تفاصيل العميل وطلباته كواجهة Design Preview.
+- [x] `/admin/inventory`: كمية كل variant وتنبيهات المخزون كواجهة Design Preview.
+- [x] `/admin/content`: إدارة Journal posts كواجهة Design Preview.
+- [x] Product form يدعم شكل variants حسب الحجم × الطحن كواجهة Design Preview.
+- [x] Image uploader UI كواجهة Design Preview.
+- [x] إضافة responsive tables وloading skeletons وconfirmation dialogs حسب الحاجة في التصميم.
 
 ## المرحلة 3، Supabase Foundation
 

@@ -1,0 +1,4 @@
+import type { Metadata } from "next";
+import { PolicyPage } from "@/features/content/components/policy-page";
+export const metadata: Metadata = { title: "Shipping and returns" };
+export default function ShippingPage() { return <PolicyPage eyebrow="Getting it home" title="From our table to yours." intro="What to expect when the roast leaves us and arrives with you." sections={[{ title: "Shipping", copy: "Orders would be packed with the roast date visible and sent using the delivery option selected at checkout." }, { title: "Timing", copy: "Delivery windows vary by destination. Your confirmation email would include the tracking details when the order leaves the roastery." }, { title: "Returns", copy: "If something arrives damaged or incorrect, contact us with your order number so we can make it right." }]} />; }

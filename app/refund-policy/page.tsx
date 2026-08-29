@@ -1,0 +1,4 @@
+import type { Metadata } from "next";
+import { PolicyPage } from "@/features/content/components/policy-page";
+export const metadata: Metadata = { title: "Refund policy" };
+export default function RefundPage() { return <PolicyPage eyebrow="Getting it right" title="A fair way to fix things." intro="If an order does not arrive as expected, here is how we would handle it." sections={[{ title: "When a refund applies", copy: "A refund may apply to damaged, missing, or incorrectly fulfilled orders after we review the details." }, { title: "How to request one", copy: "Send your order number and a short description to hello@mathaq.coffee. Photos help us solve the issue quickly." }, { title: "Timing", copy: "Approved refunds would return through the original payment method according to your bank or payment provider's timing." }]} />; }

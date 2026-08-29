@@ -18,7 +18,11 @@ export default function AboutPage() {
         image={coffeeImages.cup}
         imageAlt="A finished cup of coffee resting on a walnut counter"
         kicker="A QUIETER WAY TO WAKE"
-        facts={[["STARTED", "2024"], ["ORIGIN", "VISIBLE"], ["PROMISE", "NO GUESSWORK"]]}
+        facts={[
+          ["STARTED", "2024"],
+          ["ORIGIN", "VISIBLE"],
+          ["PROMISE", "NO GUESSWORK"],
+        ]}
         action={{ label: "Read the field notes", href: "#journal" }}
       />
 
@@ -32,15 +36,36 @@ export default function AboutPage() {
           </div>
           <div className="grid gap-0 border-t border-[var(--line)]">
             {[
-              ["01", "Why coffee needs rest", "Fresh from the roaster is not always ready for water. Rest gives trapped gas time to leave and sweetness room to open."],
-              ["02", "Reading a roast date", "Think in weeks, not expiry dates. The right window changes with roast level and how you brew."],
-              ["03", "What tasting notes mean", "They are references, not ingredients. Chocolate describes a familiar sweetness and texture already present in the coffee."],
+              [
+                "01",
+                "Why coffee needs rest",
+                "Fresh from the roaster is not always ready for water. Rest gives trapped gas time to leave and sweetness room to open.",
+              ],
+              [
+                "02",
+                "Reading a roast date",
+                "Think in weeks, not expiry dates. The right window changes with roast level and how you brew.",
+              ],
+              [
+                "03",
+                "What tasting notes mean",
+                "They are references, not ingredients. Chocolate describes a familiar sweetness and texture already present in the coffee.",
+              ],
             ].map(([number, title, copy]) => (
-              <article key={number} className="grid gap-5 border-b border-[var(--line)] py-9 md:grid-cols-[4rem_1fr]">
-                <span className="font-mono text-xs text-[var(--clay)]">{number}</span>
+              <article
+                key={number}
+                className="grid gap-5 border-b border-[var(--line)] py-9 md:grid-cols-[4rem_1fr]"
+              >
+                <span className="font-mono text-xs text-[var(--clay)]">
+                  {number}
+                </span>
                 <div>
-                  <h3 className="font-display text-3xl font-semibold tracking-[-.055em]">{title}</h3>
-                  <p className="mt-3 max-w-xl leading-7 text-[var(--mist)]">{copy}</p>
+                  <h3 className="font-display text-3xl font-semibold tracking-[-.055em]">
+                    {title}
+                  </h3>
+                  <p className="mt-3 max-w-xl leading-7 text-[var(--mist)]">
+                    {copy}
+                  </p>
                 </div>
               </article>
             ))}
@@ -52,7 +77,9 @@ export default function AboutPage() {
         <p className="eyebrow">Continue the thread</p>
         <h2 className="section-heading mx-auto mt-5">Meet the coffees.</h2>
         <Button asChild size="lg" className="mt-8">
-          <Link href="/shop">Enter the collection <ArrowRight className="size-4" /></Link>
+          <Link href="/shop">
+            Enter the collection <ArrowRight className="size-4" />
+          </Link>
         </Button>
       </section>
     </div>

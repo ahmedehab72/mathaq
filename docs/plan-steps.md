@@ -32,17 +32,17 @@
 
 ### Auth
 
-- [ ] `/login`: دخول العميل، validation، loading، error، success.
-- [ ] `/register`: إنشاء حساب عميل فقط.
-- [ ] `/forgot-password`: طلب reset email.
-- [ ] `/reset-password`: تعيين كلمة مرور جديدة.
-- [ ] `/admin/login`: شاشة دخول الأدمن منفصلة بصرياً ووظيفياً.
+- [x] `/login`: دخول العميل، validation، loading، error، success كواجهة Design Preview.
+- [x] `/register`: إنشاء حساب عميل فقط كواجهة Design Preview.
+- [x] `/forgot-password`: طلب reset email كواجهة Design Preview.
+- [x] `/reset-password`: تعيين كلمة مرور جديدة كواجهة Design Preview.
+- [x] `/admin/login`: شاشة دخول الأدمن منفصلة بصرياً ووظيفياً كواجهة Design Preview.
 
 ### Shopping
 
-- [ ] `/search`: بحث بالاسم والوصف وملاحظات التذوق، مع empty state.
-- [ ] `/wishlist`: المنتجات المفضلة، مع empty state وحذف وإضافة للسلة.
-- [ ] تطوير Product Card ليشمل favorite action وquick preview.
+- [x] `/search`: بحث بالاسم والوصف وملاحظات التذوق، مع empty state كواجهة Design Preview.
+- [x] `/wishlist`: المنتجات المفضلة، مع empty state وحذف وإضافة للسلة كواجهة Design Preview.
+- [x] تطوير Product Card ليشمل favorite action.
 - [ ] تطوير `/shop/[slug]` لعرض اختيار الحجم والطحن كسلسلة variants.
 - [ ] إضافة حالات available، low stock، out of stock.
 

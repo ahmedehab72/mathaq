@@ -10,9 +10,10 @@ import {
   RotateCcw,
   Sparkles,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { products } from "@/features/shop/services/products";
+import { useAdminStore } from "@/features/admin/stores/admin-store";
 import { Button } from "@/shared/components/ui/button";
 
 type CupId = "espresso" | "ceramic" | "glass";
@@ -82,6 +83,9 @@ export function BuildYourCup() {
   const [animationKey, setAnimationKey] = useState(0);
   const [ready, setReady] = useState(false);
   const [isPreparing, setIsPreparing] = useState(false);
+  const [orderSent, setOrderSent] = useState<string | null>(null);
+  const addOrder = useAdminStore((state) => state.addOrder);
+  const pendingTimers = useRef<number[]>([]);
 
   const selectedCup = cups.find((item) => item.id === cup) ?? cups[1];
   const selectedCoffee =
@@ -102,15 +106,43 @@ export function BuildYourCup() {
     const timer = window.setTimeout(() => {
       setIsPreparing(false);
       setReady(true);
-    }, 2600);
+      const items = [
+        { name: selectedCup.name, detail: selectedCup.detail, quantity: 1, price: selectedCup.price },
+        ...(selectedCoffee ? [{ name: selectedCoffee.name, detail: `${selectedCoffee.origin} / ${selectedCoffee.roast} roast`, quantity: 1, price: selectedCoffee.price }] : []),
+        ...chosenExtras.map((item) => ({ name: item.name, detail: item.detail, quantity: 1, price: item.price })),
+      ];
+      const id = addOrder({
+        customer: { name: "MATHAQ guest", email: "guest@example.com" },
+        address: ["Guest checkout", "Cairo, Egypt"],
+        items,
+        subtotal: total,
+        total,
+      });
+      setOrderSent(id);
+      setIsPreparing(false);
+      setReady(true);
+    }, 1200);
     return () => window.clearTimeout(timer);
-  }, [isPreparing]);
+  }, [addOrder, chosenExtras, isPreparing, selectedCoffee, selectedCup, total]);
+
+  useEffect(() => () => {
+    pendingTimers.current.forEach((timer) => window.clearTimeout(timer));
+  }, []);
+
+  function scheduleCommit(commit: () => void) {
+    const timer = window.setTimeout(() => {
+      pendingTimers.current = pendingTimers.current.filter((item) => item !== timer);
+      commit();
+    }, 240);
+    pendingTimers.current.push(timer);
+  }
 
   function replay(type: "coffee" | ExtraId) {
     setLastAdded(type);
     setAnimationKey((value) => value + 1);
     setReady(false);
     setIsPreparing(false);
+    setOrderSent(null);
   }
 
   function flyIngredient(source: HTMLElement) {
@@ -136,36 +168,48 @@ export function BuildYourCup() {
 
     const deltaX = targetRect.left + targetRect.width / 2 - (sourceRect.left + sourceRect.width / 2);
     const deltaY = targetRect.top + targetRect.height * 0.28 - (sourceRect.top + sourceRect.height / 2);
+    particle.style.setProperty("--fly-x", `${deltaX}px`);
+    particle.style.setProperty("--fly-y", `${deltaY}px`);
     requestAnimationFrame(() => {
-      particle.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(.38) rotate(260deg)`;
-      particle.style.opacity = "0";
+      particle.classList.add("is-flying");
     });
-    window.setTimeout(() => particle.remove(), 700);
+    window.setTimeout(() => particle.remove(), 760);
   }
 
   function chooseCoffee(slug: string, source: HTMLElement) {
     flyIngredient(source);
-    setCoffeeSlug(slug);
-    replay("coffee");
+    scheduleCommit(() => {
+      setCoffeeSlug(slug);
+      replay("coffee");
+    });
   }
 
   function toggleExtra(id: ExtraId, source: HTMLElement) {
+    if (selectedExtras.includes(id)) {
+      setSelectedExtras((current) => current.filter((item) => item !== id));
+      replay(id);
+      return;
+    }
+
     flyIngredient(source);
-    setSelectedExtras((current) =>
-      current.includes(id)
-        ? current.filter((item) => item !== id)
-        : [...current, id],
-    );
-    replay(id);
+    scheduleCommit(() => {
+      setSelectedExtras((current) =>
+        current.includes(id) ? current : [...current, id],
+      );
+      replay(id);
+    });
   }
 
   function reset() {
+    pendingTimers.current.forEach((timer) => window.clearTimeout(timer));
+    pendingTimers.current = [];
     setCup("ceramic");
     setCoffeeSlug(null);
     setSelectedExtras([]);
     setLastAdded(null);
     setReady(false);
     setIsPreparing(false);
+    setOrderSent(null);
   }
 
   return (
@@ -266,10 +310,11 @@ export function BuildYourCup() {
               <div className="cup-ready-card" role="status">
                 <Check className="size-5" />
                 <div>
-                  <strong>Your cup is ready.</strong>
+                  <strong>{orderSent ? "Order sent to MATHAQ." : "Your cup is ready."}</strong>
                   <span>
-                    {selectedCoffee.name} in the{" "}
-                    {selectedCup.name.toLowerCase()}.
+                    {orderSent
+                      ? `${orderSent} is now in the order dashboard.`
+                      : `${selectedCoffee.name} in the ${selectedCup.name.toLowerCase()}.`}
                   </span>
                 </div>
               </div>
@@ -323,7 +368,7 @@ export function BuildYourCup() {
               </Button>
               <Button
                 size="lg"
-                disabled={!selectedCoffee || isPreparing}
+                disabled={!selectedCoffee || isPreparing || Boolean(orderSent)}
                 aria-busy={isPreparing}
                 onClick={() => {
                   setReady(false);
@@ -338,10 +383,10 @@ export function BuildYourCup() {
                   <Coffee className="size-4" />
                 )}
                 {isPreparing
-                  ? "Preparing..."
+                  ? "Sending order..."
                   : ready
-                    ? "Finished"
-                    : "Prepare this cup"}
+                    ? "Order sent"
+                    : "Send order"}
               </Button>
             </div>
           </footer>

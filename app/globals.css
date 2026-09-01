@@ -2381,10 +2381,10 @@ a {
 .ingredient-motion {
   position: absolute;
   z-index: 4;
-  top: -14rem;
+  top: -9rem;
   left: 50%;
   width: 8rem;
-  height: 14rem;
+  height: 10rem;
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -2394,7 +2394,7 @@ a {
   top: 0;
   left: 50%;
   width: 0.35rem;
-  height: 0;
+  height: 10rem !important;
   border-radius: 999px;
   transform: translateX(-50%);
   animation: liquid-pour 1.15s var(--ease-soft) both;
@@ -2412,7 +2412,7 @@ a {
   top: 0;
   left: 50%;
   width: 1.5rem;
-  height: 9rem;
+  height: 10rem;
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -2447,7 +2447,10 @@ a {
   box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.4), 0 0 1rem rgba(197, 107, 72, 0.35);
   color: var(--clay);
   pointer-events: none;
-  transition: transform 0.68s cubic-bezier(0.3, 0.6, 0.4, 1), opacity 0.68s ease;
+  opacity: 1;
+}
+.flying-ingredient.is-flying {
+  animation: ingredient-flight 0.68s cubic-bezier(0.3, 0.6, 0.4, 1) forwards;
 }
 .flying-ingredient svg { width: 1.7rem; height: 1.7rem; }
 .brew-steam {
@@ -2867,6 +2870,12 @@ a {
   65% { opacity: 1; transform: scale(1.08); }
   100% { opacity: 1; transform: scale(1); }
 }
+@keyframes ingredient-flight {
+  0% { opacity: 1; transform: translate3d(0, 0, 0) scale(1) rotate(0); }
+  42% { opacity: 1; transform: translate3d(calc(var(--fly-x) * 0.46), calc(var(--fly-y) * 0.2 - 2rem), 0) scale(0.78) rotate(120deg); }
+  72% { opacity: 0.8; transform: translate3d(calc(var(--fly-x) * 0.82), calc(var(--fly-y) * 0.72), 0) scale(0.5) rotate(210deg); }
+  100% { opacity: 0; transform: translate3d(var(--fly-x), var(--fly-y), 0) scale(0.28) rotate(270deg); }
+}
 
 @media (min-width: 800px) {
   .build-cup-heading {
@@ -2964,6 +2973,7 @@ a {
   .cup-render.preparing .cup-liquid {
     animation: none !important;
   }
+  .flying-ingredient { display: none !important; }
   .cup-choice,
   .ingredient-card,
   .extra-card,
@@ -3018,6 +3028,19 @@ a {
   font-size: 2.4rem;
   letter-spacing: -0.06em;
 }
+.admin-insight-grid { display: grid; gap: 1rem; }
+.admin-chart-card,
+.admin-recent-card { min-width: 0; border: 1px solid var(--line); border-radius: 1.2rem; padding: 1.3rem; background: rgba(18, 41, 35, 0.58); }
+.admin-bars { display: flex; height: 11rem; align-items: end; gap: .75rem; border-bottom: 1px solid var(--line); padding: 1rem .5rem 0; }
+.admin-bars > span { position: relative; flex: 1; min-width: 1rem; border-radius: .4rem .4rem 0 0; background: linear-gradient(180deg, var(--clay), rgba(197, 107, 72, .24)); }
+.admin-bars > span i { position: absolute; inset: .35rem .25rem auto; height: .2rem; border-radius: 1rem; background: var(--oat); opacity: .55; content: ""; }
+.admin-chart-labels { display: flex; justify-content: space-between; padding: .7rem .5rem 0; color: var(--mist); font: .6rem var(--font-mono), monospace; }
+.admin-mini-list { display: grid; gap: .1rem; }
+.admin-mini-list a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--line); color: var(--oat); }
+.admin-mini-list a:hover { color: var(--clay); }
+.admin-mini-list a > span { display: grid; gap: .2rem; }
+.admin-mini-list small { color: var(--mist); font-size: .7rem; }
+.admin-mini-list b { color: var(--clay); font: .7rem var(--font-mono), monospace; }
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -3092,6 +3115,7 @@ a {
   .metric-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+  .admin-insight-grid { grid-template-columns: 1.15fr .85fr; }
   .admin-shell {
     grid-template-columns: 15rem 1fr;
   }

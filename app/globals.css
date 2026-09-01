@@ -200,6 +200,16 @@ a {
   color: var(--clay);
   letter-spacing: 0;
 }
+.mobile-account-link {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--oat);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.mobile-account-link:hover { color: var(--clay); }
 .eyebrow {
   font-family: var(--font-mono), monospace;
   font-size: 0.69rem;
@@ -246,10 +256,10 @@ a {
   padding-top: 76px;
 }
 .page-hero {
-  min-height: 72svh;
+  /* min-height: 72svh; */
   display: grid;
   align-items: end;
-  padding: 8rem clamp(1.25rem, 6vw, 7rem) 5rem;
+  padding: 4rem clamp(1.25rem, 6vw, 7rem) 5rem;
   border-bottom: 1px solid var(--line);
 }
 .page-intro {
@@ -3010,6 +3020,7 @@ a {
 .admin-content {
   padding: clamp(1.2rem, 4vw, 4rem);
 }
+.admin-user-badge { display: inline-flex; min-height: 2.75rem; align-items: center; border: 1px solid rgba(197, 107, 72, .35); border-radius: 999px; padding: .65rem .9rem; color: var(--clay); font: .62rem var(--font-mono), monospace; text-transform: uppercase; letter-spacing: .08em; }
 .metric-grid {
   display: grid;
   gap: 1rem;
@@ -3831,6 +3842,10 @@ a {
 .admin-status-option:hover {
   color: var(--oat);
 }
+.admin-status-option.selected { color: var(--oat); }
+.admin-empty-state { display: grid; gap: 1rem; max-width: 40rem; margin-top: 8rem; }
+.admin-empty-state h1 { font: 600 clamp(2.8rem, 7vw, 5.5rem)/.9 var(--font-display), serif; letter-spacing: -.07em; }
+.admin-empty-state p { color: var(--mist); }
 .admin-nav a {
   display: flex;
   width: 100%;

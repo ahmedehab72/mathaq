@@ -26,7 +26,9 @@ export type AdminOrder = {
 type NewAdminOrder = Omit<AdminOrder, "id" | "date" | "status"> & { status?: AdminOrderStatus };
 
 type AdminState = {
+  isAdmin: boolean;
   orders: AdminOrder[];
+  setAdmin: (value: boolean) => void;
   addOrder: (order: NewAdminOrder) => string;
   updateOrderStatus: (id: string, status: AdminOrderStatus) => void;
 };
@@ -50,7 +52,9 @@ const demoOrders: AdminOrder[] = [
 export const useAdminStore = create<AdminState>()(
   persist(
     (set, get) => ({
+      isAdmin: false,
       orders: demoOrders,
+      setAdmin: (value) => set({ isAdmin: value }),
       addOrder: (incoming) => {
         const id = `MTH-${1043 + get().orders.length}`;
         const order = { ...incoming, id, date: "01 Sep 2026", status: incoming.status ?? "Pending" };

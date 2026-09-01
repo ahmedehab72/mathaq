@@ -1,7 +1,8 @@
 "use client";
 
-import { BarChart3, Box, LayoutDashboard, PackagePlus, ShoppingBag, Users } from "lucide-react";
+import { BarChart3, Box, LayoutDashboard, LogOut, PackagePlus, ShoppingBag, Users } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { products } from "@/features/shop/services/products";
 import Link from "next/link";
 import { useAdminStore } from "@/features/admin/stores/admin-store";
@@ -16,6 +17,9 @@ export function AdminDashboard() {
   const [active, setActive] = useState("Overview");
   const [notice, setNotice] = useState("");
   const orders = useAdminStore((state) => state.orders);
+  const isAdmin = useAdminStore((state) => state.isAdmin);
+  const setAdmin = useAdminStore((state) => state.setAdmin);
+  const router = useRouter();
   const revenue = orders.reduce((sum, order) => sum + order.total, 0);
 
   return (
@@ -29,7 +33,7 @@ export function AdminDashboard() {
       <section className="admin-content">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div><p className="eyebrow">Design preview</p><h1 className="mt-3 font-display text-5xl font-semibold tracking-[-.07em]">{active}</h1></div>
-          <Button onClick={() => setNotice("Product editor design opened. Saving waits for the backend phase.")}><PackagePlus className="size-4" />Add product</Button>
+          <div className="flex flex-wrap items-center gap-3"><span className="admin-user-badge">{isAdmin ? "Admin signed in" : "Preview mode"}</span><Button variant="outline" onClick={() => { setAdmin(false); router.push("/admin/login"); }}><LogOut className="size-4" />Sign out</Button><Button onClick={() => setNotice("Product editor design opened. Saving waits for the backend phase.")}><PackagePlus className="size-4" />Add product</Button></div>
         </div>
         {notice && <p role="status" className="mt-5 rounded-xl border border-[rgba(197,107,72,.4)] bg-[rgba(197,107,72,.08)] p-4 text-sm text-[var(--mist)]">{notice}</p>}
         <div className="metric-grid mt-10">

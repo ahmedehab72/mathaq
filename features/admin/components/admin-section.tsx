@@ -12,6 +12,9 @@ const icons = { products: Box, orders: Package, customers: Users, inventory: Box
 export function AdminSection({ type }: { type: keyof typeof icons }) {
   const Icon = icons[type];
   const orders = useAdminStore((state) => state.orders);
+  const catalog = useAdminStore((state) => state.products);
+  const deleteProduct = useAdminStore((state) => state.deleteProduct);
+  const toggleProduct = useAdminStore((state) => state.toggleProduct);
   const title = type[0].toUpperCase() + type.slice(1);
 
   return <div className="admin-shell">
@@ -25,7 +28,7 @@ export function AdminSection({ type }: { type: keyof typeof icons }) {
     </nav></aside>
     <section className="admin-content"><div className="flex flex-wrap items-end justify-between gap-5"><div><p className="eyebrow">Studio / {type}</p><h1 className="mt-3 font-display text-6xl font-semibold tracking-[-.08em]"><Icon className="mr-3 inline size-10 text-[var(--clay)]" />{title}</h1></div><Button asChild><Link href={type === "products" ? "/admin/products/new" : "/admin"}><Plus className="size-4" />{type === "products" ? "Add product" : "Back to overview"}</Link></Button></div>
       <div className="admin-toolbar"><div className="flex items-center gap-3"><Search className="size-4 text-[var(--clay)]" /><input placeholder={`Search ${type}...`} /></div><span>Design preview / local demo</span></div>
-      {type === "products" && <div className="admin-data-list">{products.map((product) => <Link href={`/admin/products/${product.slug}/edit`} className="admin-data-row" key={product.slug}><div><strong>{product.name}</strong><span>{product.origin} / {product.roast}</span></div><b>{formatMoney(product.price)}</b><ArrowRight className="size-4" /></Link>)}</div>}
+      {type === "products" && <div className="admin-data-list">{catalog.map((product) => <div className="admin-data-row" key={product.slug}><Link className="admin-data-row-main" href={`/admin/products/${product.slug}/edit`}><div><strong>{product.name}</strong><span>{product.origin} / {product.roast}</span></div><b>{formatMoney(product.price)}</b></Link><span className={`admin-product-state ${product.published ? "published" : "hidden"}`}>{product.published ? "Published" : "Hidden"}</span><button type="button" className="admin-row-action" onClick={() => toggleProduct(product.slug)}>{product.published ? "Hide" : "Show"}</button><button type="button" className="admin-row-action danger" onClick={() => { if (window.confirm(`Delete ${product.name}?`)) deleteProduct(product.slug); }}>Delete</button></div>)}</div>}
       {type === "orders" && <div className="admin-data-list">{orders.map((order) => <Link href={`/admin/orders/${order.id}`} className="admin-data-row" key={order.id}><div><strong>{order.id}</strong><span>{order.customer.name} / {order.items.length} items / {order.date}</span></div><b>{formatMoney(order.total)}</b><span className={`order-status order-status-${order.status.toLowerCase()}`}>{order.status}</span><ArrowRight className="size-4" /></Link>)}</div>}
       {type === "customers" && <div className="admin-data-list"><Link href="/admin/customers/guest" className="admin-data-row"><div><strong>MATHAQ guest</strong><span>guest@example.com / {orders.length} order{orders.length === 1 ? "" : "s"}</span></div><b>Customer</b><ArrowRight className="size-4" /></Link></div>}
       {type === "inventory" && <div className="admin-data-list">{products.map((product, index) => <div className="admin-data-row" key={product.slug}><div><strong>{product.name}</strong><span>250 g / whole bean</span></div><b className={index === 2 ? "text-[var(--clay)]" : ""}>{index === 2 ? "Low stock" : `${18 - index * 3} units`}</b><span className="text-xs text-[var(--mist)]">Variant</span></div>)}</div>}

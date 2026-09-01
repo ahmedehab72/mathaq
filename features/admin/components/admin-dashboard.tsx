@@ -3,7 +3,6 @@
 import { BarChart3, Box, LayoutDashboard, LogOut, PackagePlus, ShoppingBag, Users } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { products } from "@/features/shop/services/products";
 import Link from "next/link";
 import { useAdminStore } from "@/features/admin/stores/admin-store";
 import { Button } from "@/shared/components/ui/button";
@@ -17,6 +16,7 @@ export function AdminDashboard() {
   const [active, setActive] = useState("Overview");
   const [notice, setNotice] = useState("");
   const orders = useAdminStore((state) => state.orders);
+  const catalog = useAdminStore((state) => state.products);
   const isAdmin = useAdminStore((state) => state.isAdmin);
   const setAdmin = useAdminStore((state) => state.setAdmin);
   const router = useRouter();
@@ -48,7 +48,7 @@ export function AdminDashboard() {
           <div className="table-scroll">
             <table className="data-table">
               <thead><tr><th>Product</th><th>Origin</th><th>Roast</th><th>Price</th><th>Status</th></tr></thead>
-              <tbody>{products.map((product) => <tr key={product.slug}><td><strong>{product.name}</strong></td><td className="text-[var(--mist)]">{product.origin}</td><td>{product.roast}</td><td>{formatMoney(product.price)}</td><td><span className="rounded-full bg-emerald-500/10 px-2 py-1 text-xs text-emerald-300">Published</span></td></tr>)}</tbody>
+              <tbody>{catalog.map((product) => <tr key={product.slug}><td><strong>{product.name}</strong></td><td className="text-[var(--mist)]">{product.origin}</td><td>{product.roast}</td><td>{formatMoney(product.price)}</td><td><span className={`admin-product-state ${product.published ? "published" : "hidden"}`}>{product.published ? "Published" : "Hidden"}</span></td></tr>)}</tbody>
             </table>
           </div>
         </div>

@@ -2351,6 +2351,9 @@ a {
   opacity: 1;
   transform: scale(1);
 }
+.cup-liquid.layer-pop {
+  animation: liquid-layer-pop 0.55s var(--ease-out) both;
+}
 .cup-render.preparing {
   animation: cup-extract 2.6s ease-in-out both;
 }
@@ -2404,35 +2407,49 @@ a {
   background: linear-gradient(#fff5df, #d6c3a2);
   box-shadow: 0 0 0.8rem rgba(255, 240, 215, 0.65);
 }
-.prepare-stream {
+.prepare-dots {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 0.38rem;
-  height: 13rem;
-  border-radius: 999px;
-  background: linear-gradient(
-    180deg,
-    #ad6748,
-    #37170e 70%,
-    rgba(43, 18, 11, 0.3)
-  );
-  box-shadow: 0 0 1rem rgba(197, 107, 72, 0.55);
+  width: 1.5rem;
+  height: 9rem;
   transform: translateX(-50%);
-  animation: prepare-pour 2.6s var(--ease-soft) both;
+  pointer-events: none;
 }
-.prepare-stream::after {
+.prepare-dots i {
   position: absolute;
-  right: -0.12rem;
-  bottom: -0.45rem;
-  width: 0.62rem;
-  height: 0.8rem;
-  border-radius: 50% 50% 55% 45%;
-  background: #4b2115;
-  transform: rotate(45deg);
-  content: "";
-  animation: brew-drop 0.42s linear infinite;
+  top: 0.45rem;
+  left: 50%;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: #6f3522;
+  box-shadow: 0 0 0.45rem rgba(197, 107, 72, 0.6);
+  transform: translateX(-50%);
+  animation: brew-dot-drop 1.2s ease-in infinite;
 }
+.prepare-dots i:nth-child(2) { animation-delay: 0.22s; }
+.prepare-dots i:nth-child(3) { animation-delay: 0.44s; }
+.prepare-dots i:nth-child(4) { animation-delay: 0.66s; }
+.prepare-dots i:nth-child(5) { animation-delay: 0.88s; }
+.flying-ingredient {
+  position: fixed;
+  z-index: 40;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgba(238, 229, 212, 0.35);
+  border-radius: 0.8rem;
+  background: rgba(18, 41, 35, 0.96);
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.4), 0 0 1rem rgba(197, 107, 72, 0.35);
+  color: var(--clay);
+  pointer-events: none;
+  transition: transform 0.68s cubic-bezier(0.3, 0.6, 0.4, 1), opacity 0.68s ease;
+}
+.flying-ingredient svg { width: 1.7rem; height: 1.7rem; }
 .brew-steam {
   position: absolute;
   z-index: 5;
@@ -2814,20 +2831,6 @@ a {
     transform: translateY(0);
   }
 }
-@keyframes prepare-pour {
-  0%,
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) scaleY(0.08);
-    transform-origin: top;
-  }
-  10%,
-  88% {
-    opacity: 1;
-    transform: translateX(-50%) scaleY(1);
-    transform-origin: top;
-  }
-}
 @keyframes cup-extract {
   0%, 100% { filter: brightness(1); }
   45% { filter: brightness(1.08); box-shadow: inset -0.8rem -1rem 1.5rem rgba(66, 40, 26, 0.2), 0 1.5rem 2.2rem rgba(0, 0, 0, 0.42), 0 0 2.4rem rgba(197, 107, 72, 0.34); }
@@ -2843,7 +2846,7 @@ a {
   }
 }
 @keyframes brew-halo { 0%, 100% { opacity: 0.35; transform: translate(-50%, -50%) scale(0.72); } 50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); } }
-@keyframes brew-drop { from { opacity: 0.9; transform: translateY(-0.25rem) rotate(45deg) scale(0.72); } to { opacity: 0; transform: translateY(0.8rem) rotate(45deg) scale(1); } }
+@keyframes brew-dot-drop { 0% { opacity: 0; transform: translate(-50%, 0) scale(0.6); } 18% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, 7.5rem) scale(0.9); } }
 @keyframes brew-steam-rise { 0% { opacity: 0; transform: translateY(0.6rem) scaleX(0.7); } 35% { opacity: 0.65; } 100% { opacity: 0; transform: translateY(-2rem) translateX(0.5rem) scaleX(1.15); } }
 @keyframes cup-finished {
   0% {
@@ -2858,6 +2861,11 @@ a {
     transform: scale(1);
     filter: brightness(1);
   }
+}
+@keyframes liquid-layer-pop {
+  0% { opacity: 0; transform: scale(0.72); }
+  65% { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 @media (min-width: 800px) {
@@ -2949,6 +2957,7 @@ a {
   .milk-swirl,
   .cup-ready-card,
   .brew-steam span,
+  .prepare-dots i,
   .brew-cup-position.is-preparing::before,
   .cup-render.preparing,
   .cup-render.finished,

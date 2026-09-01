@@ -113,12 +113,44 @@ export function BuildYourCup() {
     setIsPreparing(false);
   }
 
-  function chooseCoffee(slug: string) {
+  function flyIngredient(source: HTMLElement) {
+    const artwork = source.querySelector<HTMLElement>(
+      ".ingredient-card-image, .extra-card-art",
+    );
+    const target = document.querySelector<HTMLElement>(".cup-render");
+    if (!artwork || !target) return;
+
+    const sourceRect = artwork.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+    const particle = document.createElement("div");
+    particle.className = "flying-ingredient";
+    particle.innerHTML = artwork.classList.contains("ingredient-card-image")
+      ? ""
+      : artwork.innerHTML;
+    if (artwork.classList.contains("ingredient-card-image")) {
+      particle.style.backgroundImage = getComputedStyle(artwork).backgroundImage;
+    }
+    particle.style.left = `${sourceRect.left + sourceRect.width / 2 - 22}px`;
+    particle.style.top = `${sourceRect.top + sourceRect.height / 2 - 22}px`;
+    document.body.appendChild(particle);
+
+    const deltaX = targetRect.left + targetRect.width / 2 - (sourceRect.left + sourceRect.width / 2);
+    const deltaY = targetRect.top + targetRect.height * 0.28 - (sourceRect.top + sourceRect.height / 2);
+    requestAnimationFrame(() => {
+      particle.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(.38) rotate(260deg)`;
+      particle.style.opacity = "0";
+    });
+    window.setTimeout(() => particle.remove(), 700);
+  }
+
+  function chooseCoffee(slug: string, source: HTMLElement) {
+    flyIngredient(source);
     setCoffeeSlug(slug);
     replay("coffee");
   }
 
-  function toggleExtra(id: ExtraId) {
+  function toggleExtra(id: ExtraId, source: HTMLElement) {
+    flyIngredient(source);
     setSelectedExtras((current) =>
       current.includes(id)
         ? current.filter((item) => item !== id)
@@ -195,14 +227,23 @@ export function BuildYourCup() {
                     ))}
                   </>
                 )}
-                {isPreparing && <span className="prepare-stream" />}
+                {isPreparing && (
+                  <span className="prepare-dots">
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                )}
               </div>
 
               <div
+                key={animationKey}
                 className={`cup-render cup-render-${cup} ${coffeeSlug ? "filled" : "empty"} ${isPreparing ? "preparing" : ""} ${ready ? "finished" : ""}`}
               >
                 <span className="cup-handle" aria-hidden="true" />
-                <span className="cup-liquid" aria-hidden="true">
+                <span className="cup-liquid layer-pop" aria-hidden="true">
                   {selectedExtras.includes("milk") && (
                     <span className="milk-swirl" />
                   )}
@@ -354,7 +395,7 @@ export function BuildYourCup() {
                   type="button"
                   key={item.slug}
                   className={`ingredient-card ${coffeeSlug === item.slug ? "selected" : ""}`}
-                  onClick={() => chooseCoffee(item.slug)}
+                  onClick={(event) => chooseCoffee(item.slug, event.currentTarget)}
                   aria-pressed={coffeeSlug === item.slug}
                 >
                   <span
@@ -389,7 +430,7 @@ export function BuildYourCup() {
                     type="button"
                     key={item.id}
                     className={`extra-card ${selected ? "selected" : ""}`}
-                    onClick={() => toggleExtra(item.id)}
+                    onClick={(event) => toggleExtra(item.id, event.currentTarget)}
                     aria-pressed={selected}
                     disabled={!selectedCoffee}
                   >

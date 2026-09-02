@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Button } from "@/shared/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
-
-export const metadata: Metadata = { title: "Account preview" };
+import { useAdminStore } from "@/features/admin/stores/admin-store";
 
 export default function AccountPage() {
+  const subscription = useAdminStore((state) => state.subscriptions?.[0]);
   return (
     <div className="page-shell">
       <section className="page-hero min-h-[52svh]">
@@ -16,6 +17,7 @@ export default function AccountPage() {
             <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="brews">Saved brews</TabsTrigger>
             <TabsTrigger value="profile">Profile</TabsTrigger>
+            <TabsTrigger value="subscription">My subscription</TabsTrigger>
           </TabsList>
           <TabsContent value="orders">
             <div className="panel rounded-3xl p-6 md:p-9">
@@ -26,6 +28,7 @@ export default function AccountPage() {
               <Button variant="outline" className="mt-7">Reorder this morning</Button>
             </div>
           </TabsContent>
+          <TabsContent value="subscription"><div className="panel rounded-3xl p-8"><p className="eyebrow">My subscription</p>{subscription ? <><h2 className="mt-3 font-display text-3xl font-semibold tracking-[-.05em]">{subscription.plan}</h2><p className="mt-3 text-[var(--mist)]">{subscription.status} · Next renewal {subscription.nextRenewal}</p><Button variant="outline" className="mt-6">Pause demo subscription</Button></> : <><h2 className="mt-3 font-display text-3xl font-semibold tracking-[-.05em]">No subscription yet.</h2><p className="mt-3 text-[var(--mist)]">Choose a rhythm from the subscription page to see it here.</p></>}</div></TabsContent>
           <TabsContent value="brews">
             <div className="panel rounded-3xl p-8"><p className="eyebrow">Saved recipe</p><h2 className="mt-3 font-display text-3xl font-semibold tracking-[-.05em]">Soft V60, 18 g</h2><p className="mt-3 text-[var(--mist)]">288 g water, medium fine, 2:45</p></div>
           </TabsContent>

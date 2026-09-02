@@ -85,6 +85,7 @@ export function BuildYourCup() {
   const [isPreparing, setIsPreparing] = useState(false);
   const [orderSent, setOrderSent] = useState<string | null>(null);
   const addOrder = useAdminStore((state) => state.addOrder);
+  const decrementVariantStock = useAdminStore((state) => state.decrementVariantStock);
   const pendingTimers = useRef<number[]>([]);
 
   const selectedCup = cups.find((item) => item.id === cup) ?? cups[1];
@@ -114,16 +115,19 @@ export function BuildYourCup() {
       const id = addOrder({
         customer: { name: "MATHAQ guest", email: "guest@example.com" },
         address: ["Guest checkout", "Cairo, Egypt"],
+        shipping: { phone: "Not collected in brew preview", governorate: "Cairo", city: "Cairo", street: "Guest checkout", building: "To be confirmed", landmark: "" },
         items,
         subtotal: total,
         total,
       });
+      // Build Your Cup uses one demo 250 g serving, so the selected coffee's mock variant is reduced intentionally.
+      if (selectedCoffee) decrementVariantStock(selectedCoffee.slug, "250 g");
       setOrderSent(id);
       setIsPreparing(false);
       setReady(true);
     }, 1200);
     return () => window.clearTimeout(timer);
-  }, [addOrder, chosenExtras, isPreparing, selectedCoffee, selectedCup, total]);
+  }, [addOrder, chosenExtras, decrementVariantStock, isPreparing, selectedCoffee, selectedCup, total]);
 
   useEffect(() => () => {
     pendingTimers.current.forEach((timer) => window.clearTimeout(timer));

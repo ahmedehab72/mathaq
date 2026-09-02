@@ -7,7 +7,7 @@ import {
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useAdminStore } from "@/features/admin/stores/admin-store";
+import { getProductVariants, useAdminStore } from "@/features/admin/stores/admin-store";
 import { Button } from "@/shared/components/ui/button";
 import { formatMoney } from "@/shared/lib/utils";
 import { AdminProductModal } from "@/features/admin/components/admin-product-modal";
@@ -136,11 +136,10 @@ export function AdminDashboard() {
               ))}
             </div>
           </article>
-        </div>
-        <div className="mt-8 rounded-2xl border border-[var(--line)] bg-[rgba(18,41,35,.45)] p-4 md:p-7">
+        <div className="rounded-2xl border border-[var(--line)] bg-[rgba(18,41,35,.45)] p-4 md:p-7">
           <div className="mb-5 flex items-center justify-between">
             <h2 className="font-display text-3xl font-semibold tracking-[-.055em]">
-              Product table
+              Low stock products
             </h2>
             <span className="font-mono text-xs text-[var(--mist)]">
               Demo data
@@ -158,27 +157,19 @@ export function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {catalog.map((product) => (
-                  <tr key={product.slug}>
-                    <td>
-                      <strong>{product.name}</strong>
-                    </td>
-                    <td className="text-[var(--mist)]">{product.origin}</td>
+                {catalog.flatMap((product) => getProductVariants(product).filter((variant) => variant.stock <= 4).map((variant) => (
+                  <tr key={`${product.slug}-${variant.size}`}>
+                    <td><div className="flex items-center gap-3"><span className="admin-product-thumb" style={{ backgroundImage: `url(${product.image})` }} role="img" aria-label={`${product.name} image`} /><strong>{product.name}</strong></div></td>
+                    <td className="text-[var(--mist)]">{variant.size}</td>
                     <td>{product.roast}</td>
-                    <td>{formatMoney(product.price)}</td>
-                    <td>
-                      <span
-                        className={`admin-product-state ${product.published ? "published" : "hidden"}`}
-                      >
-                        {product.published ? "Published" : "Hidden"}
-                      </span>
-                    </td>
+                    <td className={variant.stock === 0 ? "text-red-300" : "text-[var(--clay)]"}>{variant.stock === 0 ? "Out of stock" : `${variant.stock} units`}</td>
+                    <td><span className="admin-product-state hidden">{product.published ? "Published" : "Hidden"}</span></td>
                   </tr>
-                ))}
+                )))}
               </tbody>
             </table>
           </div>
-        </div>
+        </div></div>
       </section>
       {showProductModal && (
         <AdminProductModal onClose={() => setShowProductModal(false)} />

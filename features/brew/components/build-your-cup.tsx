@@ -109,7 +109,7 @@ export function BuildYourCup() {
       setReady(true);
       const items = [
         { name: selectedCup.name, detail: selectedCup.detail, quantity: 1, price: selectedCup.price },
-        ...(selectedCoffee ? [{ name: selectedCoffee.name, detail: `${selectedCoffee.origin} / ${selectedCoffee.roast} roast`, quantity: 1, price: selectedCoffee.price }] : []),
+        ...(selectedCoffee ? [{ name: selectedCoffee.name, detail: `${selectedCoffee.origin} / ${selectedCoffee.roast} roast`, quantity: 1, price: selectedCoffee.price, image: selectedCoffee.image }] : []),
         ...chosenExtras.map((item) => ({ name: item.name, detail: item.detail, quantity: 1, price: item.price })),
       ];
       const id = addOrder({

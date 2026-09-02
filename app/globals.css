@@ -3875,6 +3875,11 @@ a {
   background: rgba(197, 107, 72, 0.12);
   color: var(--oat);
 }
+.admin-product-thumb { display: block; width: 3.5rem; height: 3.5rem; flex: 0 0 3.5rem; border: 1px solid var(--line); border-radius: .75rem; background-position: center; background-size: cover; }
+.admin-chart-filter { display: inline-flex; gap: .2rem; padding: .2rem; border: 1px solid var(--line); border-radius: .7rem; }
+.admin-chart-filter button { min-height: 1.8rem; padding: .25rem .55rem; border-radius: .45rem; color: var(--mist); font: .6rem var(--font-mono), monospace; }
+.admin-chart-filter button:hover, .admin-chart-filter button.active { background: rgba(197,107,72,.16); color: var(--oat); }
+body:has(.admin-route) .site-footer { display: none; }
 .not-found-page {
   display: grid;
   min-height: 100dvh;

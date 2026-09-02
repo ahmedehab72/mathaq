@@ -10,9 +10,9 @@ import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/shared/componen
 import { cn } from "@/shared/lib/utils";
 
 const links = [
-  ["Story", "/about"],
-  ["Coffee", "/shop"],
-  ["Brew lab", "/brew"],
+  ["About", "/about"],
+  ["Shop", "/shop"],
+  ["Brewing", "/brew"],
   ["Journal", "/journal"],
 ] as const;
 

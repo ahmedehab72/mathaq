@@ -12,9 +12,12 @@ import { Button } from "@/shared/components/ui/button";
 import { formatMoney } from "@/shared/lib/utils";
 import { AdminProductModal } from "@/features/admin/components/admin-product-modal";
 import { AdminSidebar } from "@/features/admin/components/admin-sidebar";
+import { CartesianGrid, Line, LineChart, Pie, PieChart, Cell, XAxis, YAxis } from "recharts";
+import { ChartContainer, ChartTooltip } from "@/shared/components/ui/chart";
 
 export function AdminDashboard() {
   const [active, setActive] = useState("Overview");
+  const [revenuePeriod, setRevenuePeriod] = useState<"daily" | "weekly" | "monthly">("weekly");
   const [notice, setNotice] = useState("");
   const [showProductModal, setShowProductModal] = useState(false);
   const orders = useAdminStore((state) => state.orders);
@@ -23,6 +26,9 @@ export function AdminDashboard() {
   const setAdmin = useAdminStore((state) => state.setAdmin);
   const router = useRouter();
   const revenue = orders.reduce((sum, order) => sum + order.total, 0);
+  const revenueData = { daily: [{ day: "08:00", value: 18 }, { day: "10:00", value: 32 }, { day: "12:00", value: 24 }, { day: "14:00", value: 46 }, { day: "16:00", value: 38 }, { day: "18:00", value: 52 }], weekly: [{ day: "Mon", value: 42 }, { day: "Tue", value: 64 }, { day: "Wed", value: 50 }, { day: "Thu", value: 78 }, { day: "Fri", value: 58 }, { day: "Sat", value: 86 }, { day: "Sun", value: 72 }], monthly: [{ day: "Week 1", value: 190 }, { day: "Week 2", value: 260 }, { day: "Week 3", value: 220 }, { day: "Week 4", value: 340 }] };
+  const chartData = revenueData[revenuePeriod];
+  const orderMix = [{ name: "Pending", value: orders.filter((order) => order.status === "Pending").length }, { name: "Processing", value: orders.filter((order) => order.status === "Processing").length }, { name: "Completed", value: orders.filter((order) => ["Delivered", "Shipped"].includes(order.status)).length }, { name: "Other", value: orders.filter((order) => ["Cancelled", "Refunded"].includes(order.status)).length }].filter((item) => item.value > 0);
 
   return (
     <div className="admin-shell">
@@ -104,27 +110,11 @@ export function AdminDashboard() {
               <h2 className="font-display text-3xl font-semibold tracking-[-.055em]">
                 Weekly rhythm
               </h2>
-              <span className="font-mono text-xs text-[var(--mist)]">
-                Demo analytics
-              </span>
+              <div className="flex flex-wrap items-center gap-2"><span className="font-mono text-xs text-[var(--mist)]">Demo analytics</span><div className="admin-chart-filter" aria-label="Revenue chart period">{(["daily", "weekly", "monthly"] as const).map((period) => <button type="button" key={period} className={revenuePeriod === period ? "active" : ""} onClick={() => setRevenuePeriod(period)} aria-pressed={revenuePeriod === period}>{period[0].toUpperCase() + period.slice(1)}</button>)}</div></div>
             </div>
-            <div className="admin-bars" aria-label="Demo weekly revenue chart">
-              {[42, 64, 50, 78, 58, 86, 72].map((height, index) => (
-                <span key={index} style={{ height: `${height}%` }}>
-                  <i />
-                </span>
-              ))}
-            </div>
-            <div className="admin-chart-labels">
-              <span>Mon</span>
-              <span>Tue</span>
-              <span>Wed</span>
-              <span>Thu</span>
-              <span>Fri</span>
-              <span>Sat</span>
-              <span>Sun</span>
-            </div>
+            <ChartContainer aria-label={`Demo ${revenuePeriod} revenue line chart`}><LineChart data={chartData} margin={{ left: -20, right: 10 }}><CartesianGrid stroke="rgba(232,218,187,.12)" vertical={false} /><XAxis dataKey="day" stroke="var(--mist)" tickLine={false} axisLine={false} /><YAxis stroke="var(--mist)" tickLine={false} axisLine={false} width={36} /><ChartTooltip /><Line type="monotone" dataKey="value" name="Revenue" stroke="var(--clay)" strokeWidth={3} dot={{ fill: "var(--oat)", r: 4, strokeWidth: 0 }} activeDot={{ r: 6, fill: "var(--oat)" }} /></LineChart></ChartContainer>
           </article>
+          <article className="admin-chart-card"><div className="mb-5 flex items-center justify-between"><h2 className="font-display text-3xl font-semibold tracking-[-.055em]">Order mix</h2><span className="font-mono text-xs text-[var(--mist)]">Demo analytics</span></div><ChartContainer aria-label="Demo order status circle chart"><PieChart><ChartTooltip /><Pie data={orderMix.length ? orderMix : [{ name: "No orders", value: 1 }]} dataKey="value" nameKey="name" innerRadius={48} outerRadius={78} paddingAngle={4} stroke="none">{(orderMix.length ? orderMix : [{ name: "No orders", value: 1 }]).map((item, index) => <Cell key={item.name} fill={["var(--clay)", "var(--oat)", "#6f9b83", "#8d4a36"][index % 4]} />)}</Pie></PieChart></ChartContainer><div className="flex flex-wrap gap-3 text-xs text-[var(--mist)]">{(orderMix.length ? orderMix : [{ name: "No orders", value: 0 }]).map((item, index) => <span key={item.name}><i className="mr-1 inline-block size-2 rounded-full" style={{ background: ["var(--clay)", "var(--oat)", "#6f9b83", "#8d4a36"][index % 4] }} />{item.name}: {item.value}</span>)}</div></article>
           <article className="admin-recent-card">
             <div className="mb-5 flex items-center justify-between">
               <h2 className="font-display text-3xl font-semibold tracking-[-.055em]">

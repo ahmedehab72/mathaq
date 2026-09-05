@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BrewLab } from "@/features/brew/components/brew-lab";
+import { BuildYourCup } from "@/features/brew/components/build-your-cup";
 import { coffeeImages } from "@/shared/lib/images";
 import { PageIntro } from "@/shared/components/page-intro";
 
@@ -16,9 +16,9 @@ export default function BrewPage() {
         imageAlt="Coffee blooming in a ceramic dripper with warm morning light"
         kicker="BEGIN WITH WATER"
         facts={[["DOSE", "18 g"], ["WATER", "300 g"], ["TIME", "03:00"]]}
-        action={{ label: "Start a recipe", href: "#brew-lab" }}
+        action={{ label: "Build your cup", href: "#build-your-cup" }}
       />
-      <BrewLab />
+      <BuildYourCup />
     </div>
   );
 }

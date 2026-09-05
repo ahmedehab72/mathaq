@@ -2,7 +2,9 @@ export const previewOrder = {
   id: "MTH-1042",
   date: "18 Aug 2026",
   status: "Delivered" as const,
+  paymentStatus: "Paid" as const,
   address: ["14 Garden Street", "Cairo, Egypt"],
+  shipping: { phone: "+20 100 000 1042", governorate: "Cairo", city: "Cairo", street: "14 Garden Street", building: "Building 8, Floor 2", landmark: "Near the garden" },
   items: [
     { name: "Morning No. 01", detail: "250 g, whole bean", quantity: 1, price: 18 },
     { name: "Highland No. 02", detail: "250 g, filter", quantity: 1, price: 22 },

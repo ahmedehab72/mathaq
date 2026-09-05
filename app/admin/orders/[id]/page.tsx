@@ -1,5 +1,3 @@
 import Link from "next/link";
-import { ArrowLeft, Check } from "lucide-react";
-import { OrderSummary } from "@/features/orders/components/order-summary";
-import { Button } from "@/shared/components/ui/button";
-export default function AdminOrderDetailPage() { return <div className="page-shell admin-detail-page"><section className="section-wrap"><Link href="/admin/orders" className="text-link"><ArrowLeft className="size-4" />Orders</Link><div className="mt-16 flex flex-wrap items-end justify-between gap-6"><div><p className="eyebrow">Order operations</p><h1 className="mt-4 font-display text-7xl font-semibold tracking-[-.08em]">MTH-1042</h1></div><span className="order-status">Delivered</span></div><div className="mt-12 grid gap-8 lg:grid-cols-[1fr_.6fr]"><div className="order-panel"><p className="eyebrow">Customer order</p><div className="mt-7"><OrderSummary /></div></div><div className="order-panel"><p className="eyebrow">Change status</p><div className="mt-6 grid gap-2">{["Pending", "Shipped", "Delivered", "Cancelled"].map((status) => <button type="button" className="admin-status-option" key={status}><span>{status}</span>{status === "Delivered" && <Check className="size-4 text-[var(--clay)]" />}</button>)}</div><Button className="mt-6 w-full">Save demo status</Button></div></div></section></div>; }
+import { AdminOrderDetail } from "@/features/admin/components/admin-order-detail";
+export default async function AdminOrderDetailPage({ params }: { params: Promise<{ id: string }> }) { const { id } = await params; return <AdminOrderDetail id={id} />; }

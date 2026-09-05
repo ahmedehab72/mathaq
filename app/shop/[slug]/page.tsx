@@ -25,7 +25,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div className="flavor-orbit" aria-hidden="true">
           {product.notes.slice(0, 3).map((note) => <span key={note}>{note}</span>)}
         </div>
-        <ReviewPreview />
+        <ReviewPreview productSlug={product.slug} />
       </section>
       <section className="product-detail-copy">
         <p className="eyebrow">{product.eyebrow}</p>
